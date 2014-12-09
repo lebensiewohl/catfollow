@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE></TITLE>
+<SCRIPT language="JavaScript">
+<!--
+// マウスの軌跡を表示する
+cnt = 4; // 軌跡(画像)の数
+step = 5; // 軌跡の長さ。大きいほど長くなる
+mvcnt = 0;
+mx = new Array();
+my = new Array();
+for(i=1; i<=cnt; i++) {
+  mx[i] = -100;
+  my[i] = -100;
+}
+function mouseLocus() {
+  mvcnt++;
+  mvcnt %= step;
+  if(mvcnt) return;
+  mx[cnt] = event.x - 2; // 画像を表示する位置
+  my[cnt] = event.y - 2; // 画像を表示する位置
+  expLocus();
+}
+function expLocus() {
+  for(i=1; i<=cnt; i++) {
+    mx[i-1] = mx[i];
+    my[i-1] = my[i];
+    document.all["ID"+i].style.left= mx[i-1];
+    document.all["ID"+i].style.top = my[i-1];
+  }
+}
+document.onmousemove = mouseLocus;
+//-->
+</SCRIPT>
+</HEAD>
+<!-- 数値は軌跡を元の位置に戻す時間。多いほどゆっくり戻る -->
+<BODY bgcolor="#ffffff" onLoad="setInterval('expLocus()',100);">
+<div id="ID1" style="position:absolute;"><img src="img/sm04.gif"></div>
+<div id="ID2" style="position:absolute;"><img src="img/sm03.gif"></div>
+<div id="ID3" style="position:absolute;"><img src="img/sm02.gif"></div>
+<div id="ID4" style="position:absolute;"><img src="img/sm01.gif"></div>
+マウスポインタの座標を表示しています。
+<BR><BR>
+</BODY>
+</HTML>
